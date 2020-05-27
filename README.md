@@ -4,7 +4,7 @@ MedEI - Medical Electronic Intelligence ( A compilation of tools and AI techniqu
 #### What this project will be?
 I want this project to be primarily a place where I can place my own projcts in AI ( Artificial Intelligence ) pretaining to the Medical domain specifically. I also do want to compile some techniques in gene analysis that I learned from my earlier projects but using more state-of-the-art ( SOTA ) algorithms to perform that. Finally, I do want to mention that I want this code-base to be as professional as possible so a lot of documentation will be attached to everything. 
 
-### Tools and Languages ( Will be updated as this project continues )
+#### Tools and Languages ( Will be updated as this project continues )
 Currently, I will most likely be using Python as the primary coding language.
 
 #### About Me!
