@@ -61,7 +61,7 @@ def n_gram_gene_similarity(gene1, gene2, n_gram: int):
     # At this point both n_grams should have equal size in length assert true. Throw error if not true
     # otherwise the other part of this method will not work.
     try:
-        assert(len(gene1_n_gram_dict) == len(gene2_n_gram_dict))
+        assert (len(gene1_n_gram_dict) == len(gene2_n_gram_dict))
     except AssertionError:
         print("Length of the N_Grams dictionaries are unequal and causing an error in the n_gram_gene_similarity "
               "method!")
@@ -70,4 +70,3 @@ def n_gram_gene_similarity(gene1, gene2, n_gram: int):
         vector_sum += (gene1_n_gram_dict[key] - gene2_n_gram_dict[key]) ** 2
 
     return sqrt(vector_sum)
-
