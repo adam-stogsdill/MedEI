@@ -3,7 +3,7 @@ To create an translation of genome data to something quantifiable by ML
 programs we need to create an engine that can handle and vectorize any transformation
 of the data.
 
-###Gene Base: Gene Class
+### Gene Base: Gene Class
 This allows the program to take in data and clean the genome to have
 data that only pertains to a DNA structure (containing 'g', 't', 'c', or 'a')
 and allows for seamless operation on the data. Plan to have this also have the
