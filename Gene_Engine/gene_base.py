@@ -1,7 +1,7 @@
 import numpy as np
 import re
 from Gene_Engine.gene_global_function import convert_to_numpy_object, grab_n_grams, convert_n_gram_to_dict
-from Gene_Engine.CodonTreeNode import construct_codon_translation_tree
+from Gene_Engine.CodonTreeNode import construct_codon_translation_tree, path_traversal
 from typing import List
 from enum import Enum
 
@@ -27,6 +27,7 @@ class Gene:
         if encoding == Encoding.DNA:
             self.__clean_gene_data = re.sub(r'[^atgc]', '', gene_data.lower())
             self.__vectorization = convert_to_numpy_object(self.__clean_gene_data)
+            self.__translation()
         else:
             print("Program only allows for DNA samples currently!")
 
@@ -40,6 +41,8 @@ class Gene:
     def __translation(self):
         # Translate DNA to RNA
         self.__rna_translation = "".join(['u' if nucleotide == 't' else nucleotide for nucleotide in self.gene_data])
+        self.__codon_translation = [path_traversal(codon_translation_tree, tri_gram) for tri_gram in
+                                    grab_n_grams(self.__rna_translation, 3)]
 
 
 class PreloadedDataGene(Gene):
