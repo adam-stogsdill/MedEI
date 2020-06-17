@@ -9,12 +9,18 @@ class InitializationTesting(unittest.TestCase):
 
     def test_clean_gene_initialization(self):
         print("Testing for gene_data initialization errors!")
-        self.assertEqual("tcga", Gene("543\ntc90!][2kdjga").gene_data)
+        self.assertEqual("tcga", Gene("Name", "543\ntc90!][2kdjga").gene_data)
         print("gene_data initialized correctly!")
+
+    def test_file_reading(self):
+        gene = open('F:/MedEI/gene_samples/testing_sample', 'r')
+        self.assertEqual(Gene("Name", "".join([line for line in gene])).gene_data,
+                         "GTGCTCTAAAATGTCAATTTGCATCTCAAAGACTGCAAACTTGTATGCCTTAAAATGGTGCCATTACCGT".lower())
+        gene.close()
 
     def test_vectorization_of_gene(self):
         print("Testing the vectorization of TCGA")
-        vectorization = convert_to_numpy_object(Gene("543\ntc90!][2kdjga").gene_data)
+        vectorization = convert_to_numpy_object(Gene("Name", "543\ntc90!][2kdjga").gene_data)
         vectorization_check = np.asarray([[0, 1, 0, 0],
                                           [0, 0, 1, 0],
                                           [0, 0, 0, 1],
@@ -26,14 +32,13 @@ class InitializationTesting(unittest.TestCase):
 
 class GeneGlobalFunctionTesting(unittest.TestCase):
 
-    def n_gram_similarity(self):
+    def test_n_gram_similarity(self):
         print("Testing Similarity Metric")
-        gene1 = Gene("543\ntc90!][2kdjga").gene_data
-        gene2 = Gene("543\ntc90!][2kdjga").gene_data
+        gene1 = Gene("None", "543\ntc90!][2kdjga")
+        gene2 = Gene("None", "543\ntc90!][2kdjga")
         self.assertTrue(n_gram_gene_similarity(gene1, gene2, 1) == 0)
         print("Similarity Metric check passed")
 
 
 if __name__ == '__main__':
     unittest.main()
-
