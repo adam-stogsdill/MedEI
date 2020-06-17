@@ -22,7 +22,8 @@ codon_translation_tree = construct_codon_translation_tree()
 
 class Gene:
 
-    def __init__(self, gene_data: str, encoding: Encoding = Encoding.DNA):
+    def __init__(self, name: str, gene_data: str, encoding: Encoding = Encoding.DNA):
+        self.name = name
         # Remove non-alphanumeric information from string
         if encoding == Encoding.DNA:
             self.__clean_gene_data = re.sub(r'[^atgc]', '', gene_data.lower())
@@ -44,6 +45,9 @@ class Gene:
         self.__codon_translation = [path_traversal(codon_translation_tree, tri_gram) for tri_gram in
                                     grab_n_grams(self.__rna_translation, 3)]
 
+    def general_stats(self):
+        pass
+
 
 class PreloadedDataGene(Gene):
     """
@@ -53,8 +57,8 @@ class PreloadedDataGene(Gene):
     much faster and more efficient to simply use the general Gene class.
     """
 
-    def __init__(self, gene_data: str, n_gram_calculations: List[int], append=True):
-        super().__init__(gene_data)
+    def __init__(self, name: str, gene_data: str, n_gram_calculations: List[int], append=True):
+        super().__init__(name, gene_data)
         self.append = append
         self.__n_gram_calculations = {n_gram_length: convert_n_gram_to_dict(grab_n_grams(self.gene_data, n_gram_length))
                                       for n_gram_length in n_gram_calculations}
