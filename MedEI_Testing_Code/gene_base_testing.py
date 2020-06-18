@@ -1,7 +1,7 @@
 # This is a python file to test to unit testing specifically on gene_base code
 import unittest
 from Gene_Engine.gene_base import Gene
-from Gene_Engine.gene_global_function import convert_to_numpy_object, n_gram_gene_similarity
+from Gene_Engine.gene_global_function import convert_to_numpy_object, n_gram_gene_similarity, gene_match
 import numpy as np
 
 
@@ -38,6 +38,15 @@ class GeneGlobalFunctionTesting(unittest.TestCase):
         gene2 = Gene("None", "543\ntc90!][2kdjga")
         self.assertTrue(n_gram_gene_similarity(gene1, gene2, 1) == 0)
         print("Similarity Metric check passed")
+
+    def test_match_method(self):
+        print("Testing if genes are a match!")
+        gene1 = Gene("None", "543\ntc90!][2kdjga")
+        gene2 = Gene("None", "543\ntc90!][2kdjga")
+        gene3 = Gene("None", "543\ntc90!][2kdjgaa")
+        self.assertTrue(gene_match(gene1, gene2))
+        self.assertFalse(gene_match(gene1, gene3))
+        print("Genes match properly!")
 
 
 if __name__ == '__main__':

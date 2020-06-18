@@ -21,8 +21,13 @@ def convert_to_numpy_object(gene_data: str):
     return np.delete(result, 0, axis=0)
 
 
-def grab_n_grams(gene_data: str, n_gram_length=1) -> List[str]:
-    return [gene_data[i: i + n_gram_length] for i in range(len(gene_data)) if i + n_gram_length <= len(gene_data)]
+def grab_n_grams(gene_data: str, n_gram_length=1, reading_frames=1):
+    result = []
+    for x in range(reading_frames):
+        result.append(
+            [gene_data[i: i + n_gram_length] for i in range(x, len(gene_data), n_gram_length) if i + n_gram_length <=
+             len(gene_data)])
+    return result
 
 
 def convert_n_gram_to_dict(n_gram_list: List[str]) -> Dict:
@@ -36,6 +41,10 @@ def convert_n_gram_to_dict(n_gram_list: List[str]) -> Dict:
         else:
             result_dictionary[n_gram_set] = 1
     return result_dictionary
+
+
+def gene_match(gene1, gene2):
+    return gene1.gene_data == gene2.gene_data
 
 
 def n_gram_gene_similarity(gene1, gene2, n_gram: int):

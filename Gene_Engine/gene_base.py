@@ -4,6 +4,7 @@ from Gene_Engine.gene_global_function import convert_to_numpy_object, grab_n_gra
 from Gene_Engine.CodonTreeNode import construct_codon_translation_tree, path_traversal
 from typing import List
 from enum import Enum
+from UIControls import ProgressBar
 
 
 class Encoding(Enum):
@@ -27,7 +28,7 @@ class Gene:
         # Remove non-alphanumeric information from string
         if encoding == Encoding.DNA:
             self.__clean_gene_data = re.sub(r'[^atgc]', '', gene_data.lower())
-            self.__vectorization = convert_to_numpy_object(self.__clean_gene_data)
+            # self.__vectorization = convert_to_numpy_object(self.__clean_gene_data)
             self.__translation()
         else:
             print("Program only allows for DNA samples currently!")
@@ -42,10 +43,18 @@ class Gene:
     def __translation(self):
         # Translate DNA to RNA
         self.__rna_translation = "".join(['u' if nucleotide == 't' else nucleotide for nucleotide in self.gene_data])
-        self.__codon_translation = [path_traversal(codon_translation_tree, tri_gram) for tri_gram in
-                                    grab_n_grams(self.__rna_translation, 3)]
+        self.__codon_translation = []
+        list_of_n_grams = grab_n_grams(self.__rna_translation, 3, reading_frames=3)
+        print(len(list_of_n_grams))
+        for i, rf in enumerate(list_of_n_grams):
+            self.__codon_translation.append([path_traversal(codon_translation_tree, tri_gram) for tri_gram in rf])
 
-    def general_stats(self):
+    def describe(self):
+        print(self.name)
+        print("Codon Genome Structure:")
+        for index, rf in enumerate(self.__codon_translation):
+            print("Printing READING_FRAME:", index)
+            print(''.join(rf))
         pass
 
 
