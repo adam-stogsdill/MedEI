@@ -28,7 +28,7 @@ class Gene:
         # Remove non-alphanumeric information from string
         if encoding == Encoding.DNA:
             self.__clean_gene_data = re.sub(r'[^atgc]', '', gene_data.lower())
-            # self.__vectorization = convert_to_numpy_object(self.__clean_gene_data)
+            #
             self.__translation()
         else:
             print("Program only allows for DNA samples currently!")
@@ -45,7 +45,6 @@ class Gene:
         self.__rna_translation = "".join(['u' if nucleotide == 't' else nucleotide for nucleotide in self.gene_data])
         self.__codon_translation = []
         list_of_n_grams = grab_n_grams(self.__rna_translation, 3, reading_frames=3)
-        print(len(list_of_n_grams))
         for i, rf in enumerate(list_of_n_grams):
             self.__codon_translation.append([path_traversal(codon_translation_tree, tri_gram) for tri_gram in rf])
 
@@ -66,8 +65,9 @@ class PreloadedDataGene(Gene):
     much faster and more efficient to simply use the general Gene class.
     """
 
-    def __init__(self, name: str, gene_data: str, n_gram_calculations: List[int], append=True):
+    def __init__(self, name: str, gene_data: str, n_gram_calculations: List[int], append_values=True):
         super().__init__(name, gene_data)
-        self.append = append
+        self.append_values = append_values
+        self.__vectorization = convert_to_numpy_object(self.__clean_gene_data)
         self.__n_gram_calculations = {n_gram_length: convert_n_gram_to_dict(grab_n_grams(self.gene_data, n_gram_length))
                                       for n_gram_length in n_gram_calculations}

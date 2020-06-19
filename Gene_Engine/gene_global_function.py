@@ -22,6 +22,7 @@ def convert_to_numpy_object(gene_data: str):
 
 
 def grab_n_grams(gene_data: str, n_gram_length=1, reading_frames=1):
+    # By Default there is one reading frame but when looking at genes, 3 forward reading frames is natural
     result = []
     for x in range(reading_frames):
         result.append(
