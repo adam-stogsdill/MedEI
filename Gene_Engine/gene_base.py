@@ -1,6 +1,6 @@
 import re
 from Gene_Engine.gene_global_function import convert_to_numpy_object, grab_n_grams, convert_n_gram_to_dict
-from Gene_Engine.CodonTreeNode import construct_codon_translation_tree, path_traversal
+from Gene_Engine.codon_tree_node import construct_codon_translation_tree, path_traversal
 from typing import List
 from enum import Enum
 

@@ -1,5 +1,5 @@
 import unittest
-from Gene_Engine.CodonTreeNode import construct_codon_translation_tree, path_traversal
+from Gene_Engine.codon_tree_node import construct_codon_translation_tree, path_traversal
 
 
 class CodonTreeFunctionality(unittest.TestCase):
