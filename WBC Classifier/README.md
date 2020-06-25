@@ -7,7 +7,7 @@
 Malignant: 37.258%
 Bengin: 62.742%
 
-In the figure below you can see the number of occurrences fo each class
+In the figure below you can see the number of occurrences fo each class.
 ![Number of Occurrences for each class](class_distribution.png)
 
 In the figure below you can see the distribution of values for each row.
