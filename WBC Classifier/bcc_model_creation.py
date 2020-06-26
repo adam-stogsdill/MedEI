@@ -4,6 +4,7 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def read_data():
@@ -78,6 +79,21 @@ def run_dataset_metrics():
     plt.gcf().subplots_adjust(bottom=0.30)
     plt.savefig('data_distribution.png')
 
+def correlation_plot():
+    df = read_data()
+    df.drop(['id', 'Unnamed: 32'], axis=1, inplace=True)
+    X, y = df.drop('diagnosis', axis=1), df['diagnosis']
+    columns.extend(X.columns)
+    min_max_scaler = MinMaxScaler()
+    X = min_max_scaler.fit_transform(X)
 
-plain_testing()
-model_with_min_max_scaling()
+
+    plt.figure(figsize=(10, 10))
+    ax = sns.heatmap(pd.DataFrame(X).corr(), xticklabels=columns, yticklabels=columns)
+    plt.gcf().subplots_adjust(bottom=0.30)
+    plt.gcf().subplots_adjust(left=0.30)
+    plt.savefig('correlation_plot.png')
+    plt.show()
+
+
+correlation_plot()
