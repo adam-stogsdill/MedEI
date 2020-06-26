@@ -15,6 +15,12 @@ The number of outliers most likely indicates/correlates with the malignant
 cases.
 ![Data Distribution](data_distribution.png)
 
+In the figure below we show the correlation of all properties in the data
+against itself. There are some hotspots where the correlation is fairly high
+though this is probably due to the data having clusters of data for each 
+property.
+![Correlation Plot](correlation_plot.png)
+
 ### AI Model
 
 The model that I chose to implement was sklearn's Decision Tree model.
