@@ -79,6 +79,7 @@ def run_dataset_metrics():
     plt.gcf().subplots_adjust(bottom=0.30)
     plt.savefig('data_distribution.png')
 
+
 def correlation_plot():
     df = read_data()
     df.drop(['id', 'Unnamed: 32'], axis=1, inplace=True)
@@ -86,7 +87,6 @@ def correlation_plot():
     columns.extend(X.columns)
     min_max_scaler = MinMaxScaler()
     X = min_max_scaler.fit_transform(X)
-
 
     plt.figure(figsize=(10, 10))
     ax = sns.heatmap(pd.DataFrame(X).corr(), xticklabels=columns, yticklabels=columns)
